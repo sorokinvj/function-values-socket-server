@@ -1,0 +1,13 @@
+{
+  "name": "functions-server",
+  "version": "1.0.0",
+  "description": "simple Express server sending cartesian coordinates for various functions",
+  "main": "index.js",
+  "author": "Vladislav Sorokin",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "express": "^4.18.1",
+    "socket.io": "^4.5.1"
+  }
+}
