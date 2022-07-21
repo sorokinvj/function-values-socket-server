@@ -1,6 +1,6 @@
 const io = require("socket.io")();
 
-io.listen(process.env.PORT || 2000), {
+io.listen(process.env.PORT || 2000, {
   cors: {
     origin: "*",
   },
