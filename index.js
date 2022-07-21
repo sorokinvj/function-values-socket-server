@@ -14,7 +14,13 @@ io.listen(3000, {
   },
 });
 
+let x = 0;
+const getNewCoordinates = (x) => {
+  const y = Math.floor(Math.sin(x) * 100) / 100;
+  return { x, y };
+};
 setInterval(() => {
-  console.log("emitting time", new Date().toISOString());
-  io.emit("message", new Date().toISOString());
+  console.log("emitting coordinates", getNewCoordinates(x));
+  io.emit("new coordinates", getNewCoordinates(x));
+  x++;
 }, 1000);
