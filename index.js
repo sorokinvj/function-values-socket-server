@@ -1,26 +1,32 @@
 const io = require("socket.io")();
 
-io.on("connection", (socket) => {
-  console.log(`connect: ${socket.id}`);
-
-  socket.on("disconnect", () => {
-    console.log(`disconnect: ${socket.id}`);
-  });
-});
-
-io.listen(3000, {
+io.listen(2000, {
   cors: {
-    origin: ["http://localhost:3001"],
+    origin: "*",
   },
 });
 
-let x = 0;
 const getNewCoordinates = (x) => {
   const y = Math.floor(Math.sin(x) * 100) / 100;
   return { x, y };
 };
+
+let x = 0;
+
+io.on("connection", (socket) => {
+  const { id } = socket;
+  console.log(`connect: ${id}`);
+
+  // start broadcasting functions value from 0
+  // for each socket
+  x = 0;
+
+  socket.on("disconnect", () => {
+    console.log(`disconnect: ${id}`);
+  });
+});
+
 setInterval(() => {
-  console.log("emitting coordinates", getNewCoordinates(x));
   io.emit("new coordinates", getNewCoordinates(x));
   x++;
 }, 1000);
